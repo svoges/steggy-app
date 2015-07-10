@@ -1,4 +1,8 @@
 <%= form_for(@challenge) do |f| %>
+  name: <%= f.text_field :name %> </br>
+  hint:   <%= f.text_field :hint %> </br>
+  solution: <%= f.text_field :solution %> </br>
+  image location: <%= f.text_field :image %>
   <% if @challenge.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@challenge.errors.count, "error") %> prohibited this challenge from being saved:</h2>

@@ -1,4 +1,13 @@
 <p id="notice"><%= notice %></p>
 
+Challenge
+
+<p>Name: <%= @challenge.name %></p>
+<p>Image: <%= image_tag "#{@challenge.image}" %></p>
+<p><%= link_to 'Click for hint', data: {confirm: "#{@challenge.hint}"}%></p>
+<p>Solution:<p>
+<form accept-charset="UTF-8" action="/check_solution" method="post">
+  <input id="solution" name="solution" type="text" />
+</form>
 <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 <%= link_to 'Back', challenges_path %>

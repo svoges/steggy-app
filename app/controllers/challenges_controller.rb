@@ -1,6 +1,8 @@
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
 
+  attr_accessor :name, :hint, :solution
+
   # GET /challenges
   # GET /challenges.json
   def index
@@ -69,6 +71,6 @@ class ChallengesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def challenge_params
-      params[:challenge]
+      params.require(:challenge).permit(:name, :hint, :solution, :image)
     end
 end
