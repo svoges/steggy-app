@@ -16,6 +16,4 @@
 //= require_tree .
 //= require ace/ace
 //= require ace/worker-html
-//
-//
 
