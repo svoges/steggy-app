@@ -6,8 +6,10 @@ Challenge
 <p>Image: <%= image_tag "#{@challenge.image}" %></p>
 <p class='hint-link'><%= link_to 'Click for hint', onclick="my_alert();", data: {confirm: "#{@challenge.hint}"}%></p>
 <p>Solution:<p>
-<form accept-charset="UTF-8" action="/check_solution" method="post">
+<form accept-charset="UTF-8" action="check_solution" method="post">
   <input id="solution" name="solution" type="text" />
+  <%= hidden_field_tag :challenge_id, @challenge.id -%>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 </form>
 <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 <%= link_to 'Back', challenges_path %>

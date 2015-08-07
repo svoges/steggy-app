@@ -1,7 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
 
-  attr_accessor :name, :hint, :solution
 
   # GET /challenges
   # GET /challenges.json
@@ -36,6 +35,16 @@ class ChallengesController < ApplicationController
         format.html { render :new }
         format.json { render json: @challenge.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def check_solution
+    @challenge = Challenge.where(id: 9).first
+    result = @challenge.check_solution(params["solution"])
+    if result
+      render :success
+    else
+      render :failure
     end
   end
 

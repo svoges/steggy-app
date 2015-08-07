@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # devise_for :users
+  post 'challenges/check_solution/' => 'challenges#check_solution'
   resources :challenges
   root to: "challenges#index"
   # The priority is based upon order of creation: first created -> highest priority.
