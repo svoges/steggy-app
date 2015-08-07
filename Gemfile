@@ -27,6 +27,8 @@ gem 'devise'
 
 gem 'rspec-rails', '~> 3.0'
 
+gem 'ace-rails-ap'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

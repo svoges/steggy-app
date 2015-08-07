@@ -1,22 +1,55 @@
-<p id="notice"><%= notice %></p>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Editor</title>
+  <style type="text/css" media="screen">
+    #editor {
+width: 50%;
+        margin: 0 auto;
+        height: 500px;
+        overflow: scroll;
+    }
+  </style>
+</head>
+<body>
 
-Challenge
+<pre id="editor">function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+}</pre>
 
-<p>Name: <%= @challenge.name %></p>
+<%= "Name: #{@challenge.name}" %>
 <p>Image: <%= image_tag "#{@challenge.image}" %></p>
-<p class='hint-link'><%= link_to 'Click for hint', onclick="my_alert();", data: {confirm: "#{@challenge.hint}"}%></p>
-<p>Solution:<p>
-<form accept-charset="UTF-8" action="check_solution" method="post">
-  <input id="solution" name="solution" type="text" />
-  <%= hidden_field_tag :challenge_id, @challenge.id -%>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-</form>
-<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
-<%= link_to 'Back', challenges_path %>
+<p>Hint:</p>
+<p id="challenge_hint" style="display:none"><%= @challenge.hint %> </p>
+<button type="button" id="hint_button" onClick="showHint()">Show Hint</button>
+<p>Solution:</p>
+    <form accept-charset="UTF-8" action="check_solution" method="post">
+      <input id="solution" name="solution" type="text" />
+      <%= hidden_field_tag :challenge_id, @challenge.id -%>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+    </form>
+    <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
+    <%= link_to 'Back', challenges_path %>
 
+    <script type="text/javascript">
+      function showHint() {
+        document.getElementById("challenge_hint").style.display = 'block';
+        document.getElementById("hint_button").style.display = 'none';
+      }
+
+    </script>
+
+<script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
-  function my_alert(){
-    window.open();
-  }
-
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/twilight");
+  editor.getSession().setMode("ace/mode/python");
 </script>
+
+
+</body>
+
+
