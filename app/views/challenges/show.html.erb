@@ -27,7 +27,7 @@ function runit(solution) {
        return Sk.importMainWithBody("<stdin>", false, prog, true);
    });
    myPromise.then(function(mod) {
-       var actual_solution = solution.name
+       var actual_solution = solution.getAttribute("code");
        var input = mypre.innerText.replace(/\s+/g, '');
        console.log('success');
        if (input == actual_solution) {
@@ -49,7 +49,7 @@ function runit(solution) {
 print("solution")
 
 </textarea><br />
-<button type="button" onclick="runit(<%= @challenge.solution %>)">Run</button>
+<button type="button" onclick="runit(solution)">Run</button>
 </form>
 <pre id="output" ></pre>
 
@@ -58,13 +58,9 @@ print("solution")
 <p>Hint:</p>
 <p id="challenge_hint" style="display:none"><%= @challenge.hint %> </p>
 <button type="button" id="hint_button" onClick="showHint()">Show Hint</button>
-<p>Solution:</p>
-<button type="button" onclick="">Check Solution</button>
-<form accept-charset="UTF-8" action="check_solution" method="post">
-  <input id="solution" name="solution" type="text" />
-  <%= hidden_field_tag :challenge_id, @challenge.id -%>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-</form>
+
+<div id="solution" code=<%=@challenge.solution %> >
+
 <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 <%= link_to 'Back', challenges_path %>
 
