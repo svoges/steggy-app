@@ -20,10 +20,10 @@ function builtinRead(x) {
 function runit() {
    var prog = document.getElementById("yourcode").value;
    var mypre = document.getElementById("output");
+var test = document.getElementsByTagName("pre")[0].childNodes[1];
    mypre.innerHTML = '';
    Sk.pre = "output";
    Sk.configure({output:outf, read:builtinRead});
-   (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'mycanvas';
    var myPromise = Sk.misceval.asyncToPromise(function() {
        return Sk.importMainWithBody("<stdin>", false, prog, true);
    });
@@ -38,18 +38,14 @@ function runit() {
 
 <h3>Try This</h3>
 <form>
-<textarea id="yourcode" cols="40" rows="10">import turtle
+<textarea id="yourcode" cols="40" rows="10">
+# Enter your Python code here!
+print("Hello, Steggy!")
 
-t = turtle.Turtle()
-t.forward(100)
-
-print "Hello World"
 </textarea><br />
 <button type="button" onclick="runit()">Run</button>
 </form>
 <pre id="output" ></pre>
-<!-- If you want turtle graphics include a canvas -->
-<div id="mycanvas"></div>
 
 <%= "Name: #{@challenge.name}" %>
 <p>Image: <%= image_tag "#{@challenge.image}" %></p>
@@ -57,6 +53,7 @@ print "Hello World"
 <p id="challenge_hint" style="display:none"><%= @challenge.hint %> </p>
 <button type="button" id="hint_button" onClick="showHint()">Show Hint</button>
 <p>Solution:</p>
+<button type="button" onclick="">Check Solution</button>
     <form accept-charset="UTF-8" action="check_solution" method="post">
       <input id="solution" name="solution" type="text" />
       <%= hidden_field_tag :challenge_id, @challenge.id -%>
