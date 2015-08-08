@@ -17,10 +17,9 @@ function builtinRead(x) {
 // get a reference to your pre element for output
 // configure the output function
 // call Sk.importMainWithBody()
-function runit() {
+function runit(solution) {
    var prog = document.getElementById("yourcode").value;
    var mypre = document.getElementById("output");
-var test = document.getElementsByTagName("pre")[0].childNodes[1];
    mypre.innerHTML = '';
    Sk.pre = "output";
    Sk.configure({output:outf, read:builtinRead});
@@ -28,7 +27,14 @@ var test = document.getElementsByTagName("pre")[0].childNodes[1];
        return Sk.importMainWithBody("<stdin>", false, prog, true);
    });
    myPromise.then(function(mod) {
+       var actual_solution = solution.name
+       var input = mypre.innerText.replace(/\s+/g, '');
        console.log('success');
+       if (input == actual_solution) {
+         window.open("/solution_checker/success");
+       } else {
+         window.open("/solution_checker/failure");
+       }
    },
        function(err) {
        console.log(err.toString());
@@ -39,11 +45,11 @@ var test = document.getElementsByTagName("pre")[0].childNodes[1];
 <h3>Try This</h3>
 <form>
 <textarea id="yourcode" cols="40" rows="10">
-# Enter your Python code here!
-print("Hello, Steggy!")
+# Just a placeholder now since solution is the actual solution to our challenge
+print("solution")
 
 </textarea><br />
-<button type="button" onclick="runit()">Run</button>
+<button type="button" onclick="runit(<%= @challenge.solution %>)">Run</button>
 </form>
 <pre id="output" ></pre>
 
@@ -54,21 +60,21 @@ print("Hello, Steggy!")
 <button type="button" id="hint_button" onClick="showHint()">Show Hint</button>
 <p>Solution:</p>
 <button type="button" onclick="">Check Solution</button>
-    <form accept-charset="UTF-8" action="check_solution" method="post">
-      <input id="solution" name="solution" type="text" />
-      <%= hidden_field_tag :challenge_id, @challenge.id -%>
-      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-    </form>
-    <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
-    <%= link_to 'Back', challenges_path %>
+<form accept-charset="UTF-8" action="check_solution" method="post">
+  <input id="solution" name="solution" type="text" />
+  <%= hidden_field_tag :challenge_id, @challenge.id -%>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+</form>
+<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
+<%= link_to 'Back', challenges_path %>
 
-    <script type="text/javascript">
-      function showHint() {
-        document.getElementById("challenge_hint").style.display = 'block';
-        document.getElementById("hint_button").style.display = 'none';
-      }
+<script type="text/javascript">
+  function showHint() {
+    document.getElementById("challenge_hint").style.display = 'block';
+    document.getElementById("hint_button").style.display = 'none';
+  }
 
-    </script>
+</script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
 <script src="http://www.skulpt.org/static/skulpt.min.js" type="text/javascript"></script>

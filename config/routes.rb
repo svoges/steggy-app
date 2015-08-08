@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   # devise_for :users
+  get 'solution_checker/success' => 'solution_checkers#success'
+  get 'solution_checker/failure' => 'solution_checkers#failure'
   post 'challenges/check_solution/' => 'challenges#check_solution'
   resources :challenges
   root to: "challenges#index"

@@ -37,16 +37,6 @@ class ChallengesController < ApplicationController
     end
   end
 
-  def check_solution
-    @challenge = Challenge.where(id: 9).first
-    result = @challenge.check_solution(params["solution"])
-    if result
-      render :success
-    else
-      render :failure
-    end
-  end
-
   # PATCH/PUT /challenges/1
   # PATCH/PUT /challenges/1.json
   def update
