@@ -61,6 +61,15 @@ class ChallengesController < ApplicationController
     end
   end
 
+  def check_solution
+    @challenge = Challenge.where(id: params["challenge_id"]).first
+    if params["user_solution"] == @challenge.solution
+      render :success
+    else
+      render :failure
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_challenge
