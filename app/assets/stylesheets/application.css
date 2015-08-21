@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+html {
+  padding: 200px;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/70/Stegosaurus_BW.jpg");
+  background-attachment: fixed;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+body {
+  background-color: rgba(230, 230, 235, 0.75);
+  width: 740px;
+  text-align: center;
+  font-family: "Courier New";
+}
+
+p {
+  font-family: "Courier New";
+}
+
+
+
+
