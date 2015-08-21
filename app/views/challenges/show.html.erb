@@ -12,19 +12,18 @@
 
 <pre id="output" ></pre>
 
-<%= "Name: #{@challenge.name}" %>
-<p>Image:</p>
-<%= image_tag "#{@challenge.image}" %>
-<p>Hint:</p>
-<p id="challenge_hint" style="display:none"><%= @challenge.hint %> </p>
-<button type="button" id="hint_button" onClick="showHint()">Show Hint</button>
-
-<p>Your Solution:</p>
 <form action="check_solution" method="post">
-  <input id="user_solution" name="user_solution" value="">
+  <button id="user_solution" name="user_solution" value="">Submit Solution</button>
   <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
   <%= hidden_field_tag :challenge_id, @challenge.id -%>
 </form>
+
+<%= "Name: #{@challenge.name}" %>
+<p>Image:</p>
+<%= image_tag "#{@challenge.image}" %>
+<br>
+<p id="challenge_hint" style="display:none"><%= @challenge.hint %> </p>
+<button type="button" id="hint_button" onClick="showHint()">Show Hint</button>
 
 <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 <%= link_to 'Back', challenges_path %>
